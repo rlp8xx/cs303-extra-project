@@ -5,7 +5,16 @@
 
 using namespace std;
 
+void print_path(vector<string> path) {
+  cout << path[0];
+  for (int i = 1; i < path.size(); i++) {
+    cout << " --> " << path[i];
+  }
+  cout << endl;
+}
+
 int main() {
+  // init the data
   Graph city_map = Graph();
   city_map.add_node("Kansas City");
   city_map.add_node("Denver");
@@ -28,9 +37,12 @@ int main() {
   city_map.add_edge("Seattle", "San Francisco", 808);
 
   city_map.print_data();
+
+  // get shortest paths
   vector<string> shortest_path = city_map.get_shortest_path("Seattle", "Denver");
-  for (string city : shortest_path) {
-    cout << city << " ";
-  }
-  cout << endl;
+  cout << "Shortest path from Seattle to Denver: ";
+  print_path(shortest_path);
+  shortest_path = city_map.get_shortest_path("San Francisco", "Kansas City");
+  cout << "Shortest path from San Francisco to Kansas City: ";
+  print_path(shortest_path);
 }

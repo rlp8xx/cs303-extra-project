@@ -1,5 +1,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#define NDEBUG
 
 #include <string>
 #include <vector>

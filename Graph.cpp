@@ -6,6 +6,8 @@
 
 #include "Graph.h"
 
+#define NDEBUG
+
 using namespace std;
 
 Graph::Graph() {
@@ -106,7 +108,7 @@ vector<string> Graph::get_shortest_path(string node1, string node2) {
         #ifndef NDEBUG
         cout << "Shortest_path not empty, finding min elem" << endl;
         #endif
-        if (distances[i] < min && find(shortest_path.begin(), shortest_path.end(), node_names[i]) != shortest_path.end()) {
+        if (distances[i] < min && ! (find(shortest_path.begin(), shortest_path.end(), node_names[i]) != shortest_path.end())) {
           #ifndef NDEBUG
           cout << "Found new min at index: " << i << ", " << node_names[i] << endl; 
           #endif
@@ -124,6 +126,7 @@ vector<string> Graph::get_shortest_path(string node1, string node2) {
     cout << "Minimum element idx: " << min_elem_idx << " Min elem: " << this->node_names[min_elem_idx] << endl;
     #endif 
     shortest_path.push_back(this->node_names[min_elem_idx]);
+
     // update distances for all connected nodes
     int other_idx;
     for (pair<int,string> edge : this->edges[min_elem_idx]) {
@@ -135,8 +138,6 @@ vector<string> Graph::get_shortest_path(string node1, string node2) {
         distances[other_idx] = edge.first + distances[min_elem_idx];
       }
     }
-    // set distance to inf after selection so it wont get picked again
-    distances[min_elem_idx] = INT_MAX;
   } while (min_elem_idx != idx_node2);
   return shortest_path;
 }
