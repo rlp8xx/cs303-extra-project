@@ -28,4 +28,9 @@ int main() {
   city_map.add_edge("Seattle", "San Francisco", 808);
 
   city_map.print_data();
+  vector<string> shortest_path = city_map.get_shortest_path("Seattle", "Denver");
+  for (string city : shortest_path) {
+    cout << city << " ";
+  }
+  cout << endl;
 }

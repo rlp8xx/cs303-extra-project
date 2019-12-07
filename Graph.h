@@ -15,6 +15,8 @@ class Graph {
     void add_edge(string node1, string node2, int distance);
     vector<string> get_shortest_path(string node1, string node2);
   private:
+    int find_idx(string node);
+    // parallel vectors for edges and names
     vector<vector<pair<int, string> > > edges;
     vector<string> node_names;
 };
